@@ -14,5 +14,30 @@ div {
     height: 450px;
 }
 .input-block input {
-    margin-top: 29px;
+    margin-top: 26px;
+}
+.input-block input:first-child {
+    margin-top: 40px;
+}
+.email-block div {
+    width: 250px;
+    padding: 5px;
+    margin: auto;
+}
+.right-block-page .download  {
+    width: 100px;
+    padding: 5px;
+    margin: 30px auto;
+}
+.right-block-page .background div{
+    width: 120px;
+    margin: 20px auto;
+    height: 120px;
+}
+.right-block-page {
+    position: absolute;
+    left: 76%;
+}
+.left-block-page {
+    position: fixed;
 }
