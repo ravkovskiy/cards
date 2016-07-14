@@ -4,3 +4,9 @@ div {
 .main-page .block-page{
     height: 80%;
 }
+.main-page .main-block div{
+    height: 80%;
+}
+.main-page .email-block div{
+    height: 20%;
+}
