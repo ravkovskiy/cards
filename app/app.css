@@ -2,11 +2,17 @@ div {
     border: 1px solid #aaa;
 }
 .main-page .block-page{
-    height: 80%;
+    height: 500px;
 }
-.main-page .main-block div{
-    height: 80%;
+.main-page .main-block {
+    height: 450px;
 }
 .main-page .email-block div{
-    height: 20%;
+    height: 50px;
+}
+.input-block {
+    height: 450px;
+}
+.input-block input {
+    margin-top: 29px;
 }
