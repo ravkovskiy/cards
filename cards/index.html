@@ -14,6 +14,8 @@
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="jquery/jquery-3.1.0.js"></script>
+    <script src="app/jspdf/jspdf.js"></script>
 
     <script src="systemjs.config.js"></script>
     <script>
@@ -23,5 +25,15 @@
 
   <body>
     <my-app>Loading...</my-app>
+    <script>
+      var imgData = 'data:image/jpeg;https://pp.vk.me/c616628/v616628226/ca34/bVY8DnBS55A.jpg';
+var doc = new jsPDF();
+      $(document).on('click', '#cmd', function () {
+        doc.setFontSize(40);
+doc.text(35, 25, "Paranyan loves jsPDF");
+doc.addImage(imgData, 'JPEG', 15, 40, 180, 160);
+        doc.save('sample-file.pdf');
+      });
+    </script>
   </body>
 </html>
