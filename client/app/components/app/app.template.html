@@ -1,0 +1,57 @@
+<div class="row main-page">
+    <div class="col-md-8 col-md-offset-1 left-block-page block-page">
+        <div class="row main-block">
+            <div class="col-md-8">
+                <div class="card" id="card">
+                    <img src="app/image/{{checkBackground.image}}" id="imgCard">
+                    <div class='card-input'>
+                        <div>{{name}}</div>
+                        <div>{{phone}}</div>
+                        <div>{{adress}}</div>
+                        <div>{{email}}</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class='row input-block'>
+                    <div class="col-md-10  col-md-offset-1">
+                        <input [(ngModel)]="name" type="text" class="form-control" placeholder=" Ваше имя">
+                        <input [(ngModel)]="phone" type="text" class="form-control" placeholder="Номер телефона">
+                        <input [(ngModel)]="adress" type="text" class="form-control" placeholder="Адрес страницы">
+                        <input [(ngModel)]="email" type="text" class="form-control" placeholder="Ваш email">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row email-block">
+            <div>
+                <input (click)="onClickSendCard(stringHTML)" type='button' id='savePDF' value="Отправить">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 right-block-page block-page">
+        <div class="download">
+            <form>
+                <input type="file" name="file">
+            </form>
+        </div>
+        <div class="background">
+            <div *ngFor="#backgroundItem of appService.backgroundList">
+                <img src="app/image/{{backgroundItem.image}}" (click)="onClickBackgroundItem(backgroundItem)">
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<form ref='uploadForm' 
+            id='uploadForm' 
+            action='http://localhost:3000/upload' 
+            method='post' 
+            encType="multipart/form-data">
+                <input type="file" name="sampleFile" />
+                <input type='submit' value='Upload!' />
+</form>

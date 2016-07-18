@@ -1,0 +1,56 @@
+<html>
+
+  <head>
+    <title>newfamily-example</title>
+    <base href="/"/>
+
+    <link href="libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="libs/font-awesome/css/font-awesome.css" rel="stylesheet">
+    
+    <link href="app/components/carousel/carousel.css" rel="stylesheet">
+    <link href="app/components/header/header.css" rel="stylesheet">
+    <link href="app/components/price/price.css" rel="stylesheet">
+    <link href="app/components/contacts/contacts.css" rel="stylesheet">
+    <link href="app/components/footer/footer.css" rel="stylesheet">
+    <link href="app/components/portfolio/portfolio.css" rel="stylesheet">
+    <link href="app/components/main-page/main.css" rel="stylesheet">
+    <link href="app/components/inputUser/inputUser.css" rel="stylesheet">
+    <link href="app/components/app/app.css" rel="stylesheet">
+
+
+    <!-- 1. Load libraries -->
+    <script src="libs/es6-shim/es6-shim.min.js"></script>
+    <script src="libs/systemjs/dist/system-polyfills.js"></script>
+    <script src="libs/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="libs/systemjs/dist/system.src.js"></script>
+    <script src="libs/rxjs/bundles/Rx.js"></script>
+    <script src="libs/angular2/bundles/angular2.dev.js"></script>
+    <script src="libs/angular2/bundles/router.dev.js"></script>
+    
+    <!-- 2. Configure SystemJS -->
+    <script>
+      System.config({
+        packages: {        
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('app/bootstrap')
+            .then(null, console.error.bind(console));
+    </script>
+
+  </head>
+  <base href="/">
+  <!-- 3. Display the application -->
+  <body>
+    <my-app>Loading...</my-app>
+
+    <script src="libs/jquery/dist/jquery.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
+
+    
+  </body>
+
+</html>
