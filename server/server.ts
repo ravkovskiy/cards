@@ -1,18 +1,15 @@
 var express = require('express');
 var path = require('path');
 var config = require('./app/config');
-var mongoose = require('./app/mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var favicon = require('serve-favicon');
 var HttpError = require('./app/error').HttpError;
 var AuthError = require('./app/error').AuthError;
-var ObjectID = require('mongodb').ObjectID;
 var port: number = process.env.PORT || config.get('port');
 var app = express();
 var async = require('async');
-
 var pdf = require('pdfcrowd');
 
 // create an API client instance
