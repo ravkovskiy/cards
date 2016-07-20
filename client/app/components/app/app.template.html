@@ -34,7 +34,7 @@
     <div class="col-md-2 right-block-page block-page">
         <div class="download">
             <form>
-                <input type="file" name="file">
+                <input #file (change)='onUploadFile(file.files)' type="file" name="file">
             </form>
         </div>
         <div class="background">
@@ -46,21 +46,3 @@
     
 </div>
 
-
-<form ref='uploadForm' 
-            id='uploadForm' 
-            action='http://localhost:3000/upload' 
-            method='post' 
-            encType="multipart/form-data">
-                <input type="file" name="sampleFile" />
-                <input type='submit' value='Upload!' />
-</form>
-
-<form ref='uploader' 
-            id='uploadForm' 
-            action='/fileupload' 
-            method='post' 
-            encType="multipart/form-data">
-                <input type="file" name="file" id='file'/>
-                <input type='submit' value='Upload' />
-</form>

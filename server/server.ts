@@ -28,32 +28,6 @@ var renderIndex = (req: express.Request, res: express.Response) => {
 
 
 
-var fileUpload = require('express-fileupload');
- 
-// default options 
-app.use(fileUpload());
- 
-app.post('/upload', function(req, res) {
-    var sampleFile;
- 
-    if (!req.files) {
-        res.send('No files were uploaded.');
-        return;
-    }
- 
-    sampleFile = req.files.sampleFile;
-    sampleFile.mv('filename.jpg', function(err) {
-        if (err) {
-            res.status(500).send(err);
-        }
-        else {
-            res.send('File uploaded!');
-        }
-    });
-});
-
-
-
 
 var body={};
 app.get('/',function(req, res, next) {
@@ -61,7 +35,7 @@ app.get('/',function(req, res, next) {
 });
 app.get('/pdf', function (req, res, next) {
     console.log(body);
-   client.convertHtml('<html>'+body.hhtml+'</html>', pdf.sendHttpResponse(res)); 
+   client.convertHtml('<html>'+body.stringHTML+'</html>', pdf.sendHttpResponse(res)); 
 });
 app.post('/pdf', function (req, res, next) {
     body=req.body;
@@ -82,10 +56,9 @@ var busboy = require('connect-busboy');
 
 app.use(busboy()); 
 
-app.post('/fileupload', function(req, res) {
-    console.log('ok');
+app.post('/upload', function(req, res) {
     var fstream;
-    req.pipe(req.busboy);
+    
     req.busboy.on('file', function (fieldname, file, filename) {
         console.log("Uploading: " + filename); 
         fstream = fs.createWriteStream(__dirname + '/files/' + filename);
@@ -94,6 +67,5 @@ app.post('/fileupload', function(req, res) {
             res.redirect('back');
         });
     });
+    req.pipe(req.busboy);
 });
-
-

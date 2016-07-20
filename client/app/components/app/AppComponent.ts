@@ -27,6 +27,42 @@ export class AppComponent {
             elem.style.top=this.imgHeight=-card.clientHeight/2-70+'px';
         },0);
     }
+    onUploadFile(files) {
+        // Создадим данные формы и добавим в них данные файлов из files
+ 
+        var data = new FormData();
+        $.each( files, function( key, value ){
+            data.append( key, value );
+        });
+    
+        // Отправляем запрос
+    
+        $.ajax({
+            url: '/upload',
+            type: 'POST',
+            data: data,
+            cache: false,
+            dataType: 'json',
+            processData: false, // Не обрабатываем файлы (Don't process the files)
+            contentType: false, // Так jQuery скажет серверу что это строковой запрос
+            success: function( respond, textStatus, jqXHR ){
+    
+                // Если все ОК
+    
+                if( typeof respond.error === 'undefined' ){
+                    console.log('файлы загружены')
+                }
+                else{
+                    console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
+                }
+            },
+            error: function( jqXHR, textStatus, errorThrown ){
+                console.log('ОШИБКИ AJAX запроса: ' + textStatus, errorThrown );
+                
+            }
+        });
+        this.appService.backgroundList.push({image: files[0].name});
+    }
     onClickSendCard() {
 
         this.stringHTML = `
@@ -86,7 +122,7 @@ export class AppComponent {
         $.ajax({
             url: '/pdf',
             method: 'POST',
-            data: {"hhtml": this.stringHTML},
+            data: {stringHTML: this.stringHTML},
             complete: function() {
                 $(':submit', form).button('reset');
             },
