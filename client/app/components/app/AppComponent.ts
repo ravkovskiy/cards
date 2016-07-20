@@ -122,7 +122,7 @@ export class AppComponent {
         $.ajax({
             url: '/pdf',
             method: 'POST',
-            data: {stringHTML: this.stringHTML},
+            data: {"hhtml": this.stringHTML},
             complete: function() {
                 $(':submit', form).button('reset');
             },

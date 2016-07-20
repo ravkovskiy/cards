@@ -24,7 +24,10 @@ var renderIndex = (req: express.Request, res: express.Response) => {
     res.sendFile(path.resolve(__dirname, 'index.html'));
 }
 
-
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json 
+app.use(bodyParser.json())
 
 
 
@@ -34,12 +37,11 @@ app.get('/',function(req, res, next) {
     res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 app.get('/pdf', function (req, res, next) {
-    console.log(body);
-   client.convertHtml('<html>'+body.stringHTML+'</html>', pdf.sendHttpResponse(res)); 
+   client.convertHtml('<html>'+body.hhtml+'</html>', pdf.sendHttpResponse(res)); 
 });
 app.post('/pdf', function (req, res, next) {
     body=req.body;
-   client.convertHtml('<html>hi im im</html>', pdf.sendHttpResponse(res)); 
+    client.convertHtml('<html>hi im im</html>', pdf.sendHttpResponse(res)); 
 });
 
 var server = app.listen(port, function() {
