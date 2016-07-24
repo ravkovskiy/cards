@@ -11,40 +11,76 @@ var port: number = process.env.PORT || config.get('port');
 var app = express();
 var async = require('async');
 var pdf = require('pdfcrowd');
+var nodemailer = require('nodemailer');
+var fs = require('fs');
+var busboy = require('connect-busboy');
+// create an API client instance for 'pdfcrowd'
+var client = new pdf.Pdfcrowd("Hagerre1950", "bea64af02d3211af75743ad8ad287c2b");
 
-// create an API client instance
-var client = new pdf.Pdfcrowd("yuliya", "cb73bc7414df02a0ca88aea32f159971");
-
+app.use(express.static('files'));
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
-
-
-
-var renderIndex = (req: express.Request, res: express.Response) => {
-    res.sendFile(path.resolve(__dirname, 'index.html'));
-}
-
-app.use(bodyParser.urlencoded({ extended: false }))
- 
+app.use(busboy());
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json 
 app.use(bodyParser.json())
 
-
-
-
-var body={};
-app.get('/',function(req, res, next) {
+app.get('/', function (req, res, next) {
     res.sendFile(path.resolve(__dirname, 'index.html'));
 });
-app.get('/pdf', function (req, res, next) {
-   client.convertHtml('<html>'+body.hhtml+'</html>', pdf.sendHttpResponse(res)); 
-});
+
 app.post('/pdf', function (req, res, next) {
-    body=req.body;
-    client.convertHtml('<html>hi im im</html>', pdf.sendHttpResponse(res)); 
+    client.convertHtml('<html>' + req.body.file + '</html>', pdf.saveToFile(__dirname + '/../files/' + req.body.name));
+    res.end();
 });
 
-var server = app.listen(port, function() {
+app.post('/upload', function (req, res, next) {
+    var fstream;
+
+    req.busboy.on('file', function (fieldname, file, filename) {
+        console.log("Uploading: " + filename);
+        fstream = fs.createWriteStream(__dirname + '/../files/' + filename);
+        file.pipe(fstream);
+        fstream.on('close', function () {
+            res.send({});
+        });
+    });
+    req.pipe(req.busboy);
+});
+
+app.post('/sendEmail', function (req, res, next) {
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'k.ravkovskiy@gmail.com', // Your email id
+            pass: 'kos.57630' // Your password
+        }
+    });
+    var mailOptions = {
+        from: 'k.ravkovskiy@gmail.com', // sender address
+        to: 'ravkovskiy21@gmail.com', // list of receivers
+        subject: 'Email Example', // Subject line
+        //text: text //, // plaintext body
+        attachments: [
+            {
+                filename: 'myCard.pdf',
+                path: __dirname + '/../files/' + req.body.name
+            }
+        ]
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            res.json({ yo: 'error' });
+        } else {
+            console.log('Message sent: ' + info.response);
+            res.json({ yo: info.response });
+        };
+    });
+});
+
+var server = app.listen(port, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log('This express app is listening on port:' + port);
@@ -52,22 +88,3 @@ var server = app.listen(port, function() {
 
 
 
-
-var fs = require('fs');
-var busboy = require('connect-busboy');
-
-app.use(busboy()); 
-
-app.post('/upload', function(req, res) {
-    var fstream;
-    
-    req.busboy.on('file', function (fieldname, file, filename) {
-        console.log("Uploading: " + filename); 
-        fstream = fs.createWriteStream(__dirname + '/files/' + filename);
-        file.pipe(fstream);
-        fstream.on('close', function () {
-            res.redirect('back');
-        });
-    });
-    req.pipe(req.busboy);
-});

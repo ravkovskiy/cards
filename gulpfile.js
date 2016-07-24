@@ -69,7 +69,7 @@ gulp.task('build:app', function(){
     var tsProject = ts.createProject('client/tsconfig.json');
 
     //Copy our .html,.js,.css etc. files from client in dist
-    gulp.src('client/**/*[.html,.js,.css,.jpeg,.jpg,.json]').pipe(gulp.dest('dist'));
+    gulp.src('client/**/*[.html,.js,.css,.jpeg,.jpg,.json,.pdf]').pipe(gulp.dest('dist'));
     
     var tsResult = gulp.src('client/**/*.ts')
 		.pipe(sourcemaps.init())

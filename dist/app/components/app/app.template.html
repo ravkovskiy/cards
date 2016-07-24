@@ -3,7 +3,7 @@
         <div class="row main-block">
             <div class="col-md-8">
                 <div class="card" id="card">
-                    <img src="app/image/{{checkBackground.image}}" id="imgCard">
+                    <img src="/{{checkBackground.image}}" id="imgCard">
                     <div class='card-input'>
                         <div>{{name}}</div>
                         <div>{{phone}}</div>
@@ -26,7 +26,7 @@
         </div>
         <div class="row email-block">
             <div>
-                <input (click)="onClickSendCard(stringHTML)" type='button' id='savePDF' value="Отправить">
+                <input (click)="onClickSendCard(stringHTML);" type='button' id='savePDF' value="Отправить">
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
         </div>
         <div class="background">
             <div *ngFor="#backgroundItem of appService.backgroundList">
-                <img src="app/image/{{backgroundItem.image}}" (click)="onClickBackgroundItem(backgroundItem)">
+                <img src="/{{backgroundItem.image}}" (click)="onClickBackgroundItem(backgroundItem)">
             </div>
         </div>
     </div>

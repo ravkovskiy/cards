@@ -1,10 +1,16 @@
 export class AppService {
     backgroundList = [
         {
-            image: 'kot14.jpg',
+            image: '16080066.jpg',
         },
         {
-            image: 'kot2.jpeg',
+            image: '1309989343_30.jpg',
+        },
+        {
+            image: 'default.jpg',
+        },
+        {
+            image: 'vizitka_fon_parikmaher 2.jpg',
         }
     ]
 }

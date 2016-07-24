@@ -29,6 +29,7 @@
     "jquery": "~2.2.3",
     "mongoose": "^4.5.1",
     "nconf": "^0.8.4",
+    "nodemailer": "^2.5.0",
     "pdfcrowd": "^1.1.1",
     "querystring": "^0.2.0",
     "reflect-metadata": "0.1.2",
