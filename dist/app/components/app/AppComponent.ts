@@ -57,7 +57,7 @@ export class AppComponent {
                 // Если все ОК
 
                 if (typeof respond.error === 'undefined') {
-                    console.log('файлы загружены');
+                    console.log('файл загружен и сохранен');
                     addBackground();
                 }
                 else {
@@ -134,7 +134,7 @@ export class AppComponent {
                 // Если все ОК
 
                 if (typeof respond.error === 'undefined') {
-                    console.log('файл отправлен');
+                    console.log('файл преобразован в PDF');
                     realThis.sendFile();
                 }
                 else {
